@@ -1,0 +1,86 @@
+Задание 2.
+1. Пример REST API запроса:
+GET /api/v1/partners/stores?city_id=731&platform=ios
+где query-параметры: 
+- city_id — город пользователя (Тип "number") (для расчёта доступности и слотов доставки);
+- platform — ios / android (опционально, если влияет на ссылки или аналитику).
+Headers (для примера):
+Authorization: Bearer <access_token>
+Accept: application/json
+Content-Type: application/json
+
+2. Пример ответа REST API (json):
+{
+  "success": true,
+  "data": {
+    "title": "Выберите магазин",
+    "stores": [
+      {
+        "id": "metro",
+        "name": "METRO",
+        "logo_url": "https://cdn.petrushka.ru/partners/metro/logo.png",
+        "delivery": {
+          "type": "scheduled",
+          "label": "Ближайшая доставка",
+          "date": "today",
+          "time_from": "21:00",
+          "time_to": "23:00",
+          "display_text": "сегодня 21:00–23:00"
+        },
+        "deeplink_url": "https://metro.ru/online?utm_source=petrushka",
+        "is_external": true
+      },
+      {
+        "id": "auchan",
+        "name": "Ашан",
+        "logo_url": "https://cdn.petrushka.ru/partners/auchan/logo.png",
+        "delivery": {
+          "type": "scheduled",
+          "label": "Ближайшая доставка",
+          "date": "today",
+          "time_from": "18:00",
+          "time_to": "20:00",
+          "display_text": "сегодня 18:00–20:00"
+        },
+        "deeplink_url": "https://www.auchan.ru/?utm_source=petrushka",
+        "is_external": true
+      },
+      {
+        "id": "vkusvill",
+        "name": "ВкусВилл",
+        "logo_url": "https://cdn.petrushka.ru/partners/vkusvill/logo.png",
+        "delivery": {
+          "type": "fast",
+          "label": "Быстрая доставка",
+          "min_minutes": 20,
+          "max_minutes": 60,
+          "display_text": "от 20 до 60 минут"
+        },
+        "deeplink_url": "https://vkusvill.ru/delivery/?utm_source=petrushka",
+        "is_external": true
+      },
+      {
+        "id": "victoria",
+        "name": "Виктория",
+        "logo_url": "https://cdn.petrushka.ru/partners/victoria/logo.png",
+        "delivery": {
+          "type": "scheduled",
+          "label": "Ближайшая доставка",
+          "date": "today",
+          "time_from": "17:00",
+          "time_to": "19:00",
+          "display_text": "сегодня 17:00–19:00"
+        },
+        "deeplink_url": "https://victoria-group.ru/?utm_source=petrushka",
+        "is_external": true
+      }
+    ]
+  }
+}
+
+name - заголовок карточки
+logo_url - иконка справа
+delivery.display_text - текст под названием
+delivery.type - логика отображения (быстрая / по слотам)
+
+deeplink_url + is_external=true - при клике открывается внешний ресурс (web / external app)
